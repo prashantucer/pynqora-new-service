@@ -1,7 +1,8 @@
 import React from 'react';
 import AnimatedEntry from '../components/AnimatedEntry';
 import SectionHeader from '../components/SectionHeader';
-import { ArrowRight, ArrowUpRight, Github, Code, Cpu } from 'lucide-react';
+import { ArrowRight, ArrowUpRight, Code, Cpu } from 'lucide-react';
+import { FaGithub } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import { workProjects } from '../data/work';
 
@@ -90,7 +91,7 @@ const Work: React.FC = () => {
         <div className="container">
           <AnimatedEntry direction="up">
             <h2 className="section-heading" style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '3rem' }}>
-              <Github size={24} className="text-accent" /> Open Source
+              <FaGithub size={24} className="text-accent" /> Open Source
             </h2>
           </AnimatedEntry>
 

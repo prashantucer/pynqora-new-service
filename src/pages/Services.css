@@ -1,62 +1,630 @@
-.services-page {
-  /* Inherit standard page wrapper styles */
+/* ============================================================
+   Services Page Styles
+   ============================================================ */
+
+/* ---------- Hero Section ---------- */
+.hero-grid-bg {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-image: 
+    linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+  background-size: 50px 50px;
+  z-index: 0;
+  pointer-events: none;
 }
 
-.services-list {
+
+/* ---------- Services Grid Section ---------- */
+.services-grid-section {
+  position: relative;
+  background: var(--color-bg);
+}
+
+.service-card {
+  position: relative;
+  background: var(--color-bg-elevated);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-8);
   display: flex;
   flex-direction: column;
-  gap: 0;
-  border-top: 1px solid var(--color-border);
+  height: 100%;
+  overflow: hidden;
+  transition: all var(--transition-base);
+  cursor: pointer;
 }
 
-.service-row {
-  display: flex;
-  flex-direction: column;
-  padding: var(--space-8) 0;
-  border-bottom: 1px solid var(--color-border);
-  transition: background-color var(--transition-base);
+.service-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), var(--color-surface) 0%, transparent 50%);
+  opacity: 0;
+  transition: opacity 0.3s;
+  pointer-events: none;
 }
 
-.service-row:hover {
-  background-color: var(--color-surface);
+.service-card:hover {
+  transform: translateY(-5px);
+  border-color: var(--color-border-hover);
+  box-shadow: var(--shadow-md), 0 0 20px var(--color-accent-subtle);
 }
 
-@media (min-width: 768px) {
-  .service-row {
-    flex-direction: row;
-    gap: var(--space-12);
-    padding: var(--space-12) var(--space-6);
-  }
+.service-card:hover::before {
+  opacity: 1;
 }
 
-.service-row__num {
-  font-family: var(--font-heading);
+.service-card__img-container {
+  position: relative;
+  height: 180px;
+  margin-bottom: var(--space-6);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+}
+
+.service-card__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform var(--transition-base);
+}
+
+.service-card:hover .service-card__img {
+  transform: scale(1.06);
+}
+
+.service-card__title {
   font-size: var(--text-2xl);
-  font-weight: 600;
+  margin-bottom: var(--space-3);
+  color: var(--color-text);
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.service-card__desc {
+  font-size: var(--text-base);
+  color: var(--color-text-secondary);
+  flex-grow: 1;
+  margin-bottom: var(--space-6);
+}
+
+.service-card__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-bottom: var(--space-6);
+}
+
+.service-card__tag {
+  font-size: var(--text-xs);
+  padding: 4px 10px;
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-full);
   color: var(--color-text-muted);
-  margin-bottom: var(--space-4);
+}
+
+.service-card__link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-weight: 600;
+  color: var(--color-accent);
+  margin-top: auto;
+  font-size: var(--text-sm);
+  transition: gap var(--transition-fast);
+}
+
+.service-card:hover .service-card__link {
+  gap: var(--space-3);
+}
+
+/* ---------- Process Timeline ---------- */
+.process-timeline {
+  position: relative;
+  max-width: 800px;
+  margin: 0 auto;
+  padding-left: var(--space-8);
 }
 
 @media (min-width: 768px) {
-  .service-row__num {
-    width: 60px;
-    margin-bottom: 0;
+  .process-timeline {
+    padding-left: 0;
   }
 }
 
-.service-row__content {
-  flex: 1;
-  max-width: 800px;
+.process-timeline::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 24px;
+  width: 2px;
+  background: var(--color-border);
 }
 
-.service-row__title {
+@media (min-width: 768px) {
+  .process-timeline::before {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}
+
+.timeline-item {
+  position: relative;
+  margin-bottom: var(--space-12);
+}
+
+@media (min-width: 768px) {
+  .timeline-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .timeline-item:nth-child(even) {
+    flex-direction: row-reverse;
+  }
+}
+
+.timeline-dot {
+  position: absolute;
+  left: -2px;
+  top: 0;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--color-accent);
+  border: 4px solid var(--color-bg);
+  box-shadow: 0 0 0 2px var(--color-border);
+  z-index: 1;
+}
+
+@media (min-width: 768px) {
+  .timeline-dot {
+    left: 50%;
+    transform: translateX(-50%);
+    top: 50%;
+    margin-top: -10px;
+  }
+}
+
+.timeline-content {
+  background: var(--color-bg-elevated);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
+  position: relative;
+  transition: all var(--transition-base);
+}
+
+@media (min-width: 768px) {
+  .timeline-content {
+    width: calc(50% - 40px);
+  }
+}
+
+.timeline-content:hover {
+  border-color: var(--color-accent-subtle);
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-md);
+}
+
+.timeline-step {
+  font-family: var(--font-heading);
+  font-size: var(--text-4xl);
+  font-weight: 800;
+  color: var(--color-accent-subtle);
+  position: absolute;
+  top: -10px;
+  right: 10px;
+  line-height: 1;
+  pointer-events: none;
+}
+
+.timeline-title {
+  font-size: var(--text-xl);
+  margin-bottom: var(--space-2);
+  position: relative;
+  z-index: 2;
+}
+
+.timeline-desc {
+  color: var(--color-text-secondary);
+  position: relative;
+  z-index: 2;
+}
+
+/* ---------- Compass Capabilities Section ---------- */
+.compass-section {
+  position: relative;
+  background: var(--color-bg);
+  overflow: hidden;
+}
+
+.compass-layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-8);
+  align-items: center;
+}
+
+@media (min-width: 1024px) {
+  .compass-layout {
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: var(--space-12);
+  }
+}
+
+.compass-dial-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 380px;
+  position: relative;
+}
+
+@media (min-width: 640px) {
+  .compass-dial-container {
+    min-height: 480px;
+  }
+}
+
+.compass-dial {
+  position: relative;
+  width: 320px;
+  height: 320px;
+  border-radius: 50%;
+  border: 1.5px dashed var(--color-border);
+  background: radial-gradient(circle, rgba(0, 243, 255, 0.03) 0%, transparent 70%);
+  box-shadow: inset 0 0 30px rgba(0, 243, 255, 0.02);
+  transition: border-color var(--transition-base);
+}
+
+@media (min-width: 480px) {
+  .compass-dial {
+    width: 380px;
+    height: 380px;
+  }
+}
+
+.compass-dial__ring-outer {
+  position: absolute;
+  top: -15px; left: -15px; right: -15px; bottom: -15px;
+  border: 1px solid var(--color-border);
+  border-radius: 50%;
+  opacity: 0.25;
+  pointer-events: none;
+}
+
+.compass-dial__ring-inner {
+  position: absolute;
+  top: 15px; left: 15px; right: 15px; bottom: 15px;
+  border: 1px dashed var(--color-border);
+  border-radius: 50%;
+  opacity: 0.15;
+  pointer-events: none;
+}
+
+.compass-needle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 4px;
+  height: 100%;
+  transform-origin: 50% 50%;
+  transition: transform 0.7s cubic-bezier(0.34, 1.56, 0.64, 1);
+  pointer-events: none;
+  z-index: 2;
+}
+
+.compass-needle__pointer {
+  position: absolute;
+  top: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 6px;
+  height: 40%;
+  background: linear-gradient(to top, var(--color-accent), #00ffcc);
+  clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+  box-shadow: 0 0 15px var(--color-accent);
+}
+
+.compass-needle__glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--color-bg);
+  border: 2px solid var(--color-accent);
+  box-shadow: 0 0 15px var(--color-accent);
+}
+
+@keyframes compass-radar {
+  0% {
+    width: 40px;
+    height: 40px;
+    opacity: 0.6;
+  }
+  100% {
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+  }
+}
+
+.compass-radar-ripple {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  border: 1.5px solid var(--color-accent-subtle);
+  border-radius: 50%;
+  animation: compass-radar 4s infinite linear;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.compass-node {
+  position: absolute;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background: var(--color-bg-elevated);
+  border: 1.5px solid var(--color-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transform: translate(-50%, -50%);
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  z-index: 5;
+  box-shadow: var(--shadow-sm);
+}
+
+@media (min-width: 480px) {
+  .compass-node {
+    width: 52px;
+    height: 52px;
+  }
+}
+
+.compass-node:hover,
+.compass-node.is-active {
+  border-color: var(--color-accent);
+  background: var(--color-accent-subtle);
+  box-shadow: 0 0 18px var(--color-accent-subtle);
+  transform: translate(-50%, -50%) scale(1.12);
+}
+
+.compass-node__direction {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: var(--text-sm);
+  color: var(--color-text-secondary);
+  transition: color 0.3s;
+}
+
+.compass-node.is-active .compass-node__direction,
+.compass-node:hover .compass-node__direction {
+  color: var(--color-accent);
+}
+
+.compass-node__label {
+  position: absolute;
+  top: 108%;
+  white-space: nowrap;
+  font-size: var(--text-xs);
+  font-weight: 500;
+  color: var(--color-text-muted);
+  opacity: 0.6;
+  pointer-events: none;
+  transition: all 0.3s;
+  background: rgba(10, 10, 15, 0.7);
+  padding: 2px 6px;
+  border-radius: var(--radius-sm);
+  border: 1px solid transparent;
+}
+
+.compass-node.is-active .compass-node__label,
+.compass-node:hover .compass-node__label {
+  opacity: 1;
+  color: var(--color-accent);
+  border-color: var(--color-accent-subtle);
+  box-shadow: 0 2px 8px rgba(0, 243, 255, 0.1);
+}
+
+/* ---------- Compass Details Panel ---------- */
+.compass-details-panel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.compass-details-card {
+  width: 100%;
+  max-width: 480px;
+  background: var(--color-bg-elevated);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+  transition: all var(--transition-base);
+}
+
+.compass-details-card:hover {
+  border-color: var(--color-border-hover);
+  box-shadow: var(--shadow-xl), 0 0 25px var(--color-accent-subtle);
+}
+
+.compass-details-card__img-container {
+  height: 180px;
+  position: relative;
+  overflow: hidden;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.compass-details-card__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s;
+}
+
+.compass-details-card:hover .compass-details-card__img {
+  transform: scale(1.05);
+}
+
+.compass-details-card__badge {
+  position: absolute;
+  bottom: var(--space-4);
+  right: var(--space-4);
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(4px);
+  border: 1px solid var(--color-border);
+  color: var(--color-accent);
+  font-family: var(--font-heading);
+  font-size: var(--text-xs);
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: var(--radius-full);
+}
+
+.compass-details-card__body {
+  padding: var(--space-6) var(--space-6) var(--space-8);
+}
+
+.compass-details-card__title {
   font-size: var(--text-2xl);
   margin-bottom: var(--space-3);
   color: var(--color-text);
 }
 
-.service-row__desc {
-  font-size: var(--text-lg);
+.compass-details-card__desc {
+  font-size: var(--text-base);
   color: var(--color-text-secondary);
   line-height: 1.6;
+  margin-bottom: var(--space-6);
+}
+
+.compass-details-card__subservices {
+  margin-bottom: var(--space-6);
+}
+
+.compass-details-card__tag-label {
+  font-size: var(--text-xs);
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  font-weight: 700;
+  letter-spacing: 1px;
+  display: block;
+  margin-bottom: var(--space-3);
+}
+
+.compass-details-card__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.compass-details-card__tag {
+  font-size: var(--text-xs);
+  padding: 4px 12px;
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  color: var(--color-text-secondary);
+  border-radius: var(--radius-full);
+}
+
+.compass-details-card__btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+}
+
+/* ---------- Why Choose Us ---------- */
+.feature-card {
+  text-align: left;
+  padding: var(--space-6);
+  background: var(--color-bg-elevated);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  height: 100%;
+  transition: all var(--transition-base);
+}
+
+.feature-card:hover {
+  border-color: var(--color-border-hover);
+  background: var(--color-surface);
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md), 0 0 20px var(--color-accent-subtle);
+}
+
+.feature-card__img-container {
+  height: 150px;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  margin-bottom: var(--space-6);
+  border: 1px solid var(--color-border);
+}
+
+.feature-card__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform var(--transition-base);
+}
+
+.feature-card:hover .feature-card__img {
+  transform: scale(1.06);
+}
+
+.feature-title {
+  font-size: var(--text-xl);
+  margin-bottom: var(--space-3);
+}
+
+.feature-desc {
+  color: var(--color-text-secondary);
+}
+
+/* ---------- Final CTA ---------- */
+.final-cta {
+  position: relative;
+  overflow: hidden;
+  padding: var(--space-32) 0;
+  text-align: center;
+  border-top: 1px solid var(--color-border);
+  background: linear-gradient(to bottom, var(--color-bg), var(--color-bg-elevated));
+}
+
+.final-cta__content {
+  position: relative;
+  z-index: 2;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.final-cta__title {
+  font-size: var(--text-4xl);
+  margin-bottom: var(--space-6);
+}
+
+.final-cta__actions {
+  display: flex;
+  justify-content: center;
+  gap: var(--space-4);
+  margin-top: var(--space-8);
+  flex-wrap: wrap;
 }
